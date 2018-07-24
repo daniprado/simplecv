@@ -1,7 +1,7 @@
 %% start of file 'argallarcv.cls'.
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{argallarcv}[2017/09/18 version inicial.]
+\ProvidesClass{argallarcv}[2017/09/18 initial version.]
 \ProcessOptions\relax
 
 \RequirePackage{ifthen}
@@ -48,36 +48,36 @@
 \newcommand*{\listitemsymboliii}{\labelitemiii~}
 
 \newcommand\customfont[1]{{\usefont{T1}{custom}{m}{n} #1 }}
-\newcommand*{\titulofont}{\fontfamily{custom}\fontsize{34}{36}\mdseries\upshape}
+\newcommand*{\titlefont}{\fontfamily{custom}\fontsize{34}{36}\mdseries\upshape}
 \newcommand*{\pdatafont}{\normalsize\mdseries\upshape}
 \newcommand*{\introfont}{\normalsize\mdseries\upshape}
-\newcommand*{\seccionfont}{\Large\mdseries\upshape}
-\newcommand*{\subseccionfont}{\large\mdseries\upshape}
-\newcommand*{\coletillasubseccionfont}{\large\mdseries\upshape}
-\newcommand*{\textoentradafont}{\normalsize\mdseries\upshape}
-\newcommand*{\coletillaentradafont}{\normalsize\mdseries\upshape}
-\newcommand*{\detallefont}{\normalsize\mdseries\upshape}
+\newcommand*{\sectionfont}{\Large\mdseries\upshape}
+\newcommand*{\subsectionfont}{\large\mdseries\upshape}
+\newcommand*{\tailsubsectionfont}{\large\mdseries\upshape}
+\newcommand*{\textitemfont}{\normalsize\mdseries\upshape}
+\newcommand*{\tailitemfont}{\normalsize\mdseries\upshape}
+\newcommand*{\detailfont}{\normalsize\mdseries\upshape}
 
-\newcommand*{\nombrestyle}[1]{{\titulofont\textcolor{color0}{#1}}}
-\newcommand*{\apellidostyle}[1]{{\titulofont\textcolor{color2}{#1}}}
+\newcommand*{\namestyle}[1]{{\titlefont\textcolor{color0}{#1}}}
+\newcommand*{\surnamestyle}[1]{{\titlefont\textcolor{color2}{#1}}}
 \newcommand*{\pdatastyle}[1]{{\pdatafont\textcolor{color0}{\textit{#1}}}}
 \newcommand*{\introstyle}[1]{{\introfont\textcolor{color0}{#1}}}
-\newcommand*{\seccionstyle}[1]{{\seccionfont\textcolor{color1}{\textbf{#1}}}}
-\newcommand*{\subseccionstyle}[1]{{\subseccionfont\textcolor{color1}{\textbf{#1}}}}
-\newcommand*{\coletillasubseccionstyle}[1]{{\coletillasubseccionfont\textcolor{color3}{#1}}}
-\newcommand*{\textoentradastyle}[1]{{\textoentradafont\textcolor{color0}{#1}}}
-\newcommand*{\coletillaentradastyle}[1]{{\coletillaentradafont\textcolor{color3}{#1}}}
-\newcommand*{\detallestyle}[1]{{\detallefont\textcolor{color2}{\textit{#1}}}}
-\newcommand*{\detallesinentradastyle}[1]{{\detallefont\textcolor{color2}{\textit{#1}}}}
+\newcommand*{\sectionstyle}[1]{{\sectionfont\textcolor{color1}{\textbf{#1}}}}
+\newcommand*{\subsectionstyle}[1]{{\subsectionfont\textcolor{color1}{\textbf{#1}}}}
+\newcommand*{\tailsubsectionstyle}[1]{{\tailsubsectionfont\textcolor{color3}{#1}}}
+\newcommand*{\textitemstyle}[1]{{\textitemfont\textcolor{color0}{#1}}}
+\newcommand*{\tailitemstyle}[1]{{\tailitemfont\textcolor{color3}{#1}}}
+\newcommand*{\detailstyle}[1]{{\detailfont\textcolor{color2}{\textit{#1}}}}
+\newcommand*{\detailsinitemstyle}[1]{{\detailfont\textcolor{color2}{\textit{#1}}}}
 
 \newlength{\introwidth}
 \setlength{\introwidth}{0.165\textwidth}
-\newlength{\separadorwidth}
-\setlength{\separadorwidth}{0.015\textwidth}
-\newlength{\textowidth}
+\newlength{\separatorwidth}
+\setlength{\separatorwidth}{0.015\textwidth}
+\newlength{\textwidth}
 
 \newlength{\baseletterheight}
-\settoheight{\baseletterheight}{\seccionstyle{o}}
+\settoheight{\baseletterheight}{\sectionstyle{o}}
 \setlength{\baseletterheight}{\baseletterheight-0.55ex}
 
 \newif\if@firstdetailselement\@firstdetailselementtrue
@@ -88,16 +88,16 @@
     \\\fi
   \@firstdetailselementfalse}
 
-\newcommand*{\calculalongitudes}{
-  \setlength{\textowidth}{\textwidth-\separadorwidth-\introwidth}
+\newcommand*{\calculatelengths}{
+  \setlength{\textwidth}{\textwidth-\separatorwidth-\introwidth}
   \setlength{\parskip}{0\p@}}
-\AtBeginDocument{\calculalongitudes{}}
+\AtBeginDocument{\calculatelengths{}}
 \newcommand*{\@initializelength}[1]{
   \ifdefined#1\else\newlength{#1}\fi}
 
-\newcommand*{\creatitulo}{
-  \newbox{\titulo}
-  \savebox{\titulo}{
+\newcommand*{\createtitle}{
+  \newbox{\title}
+  \savebox{\title}{
     \begin{tabular}[b]{@{}r@{}}
       \ifthenelse{\isundefined{\@mobile}}{}{\makenewline\mobilesymbol\pdatastyle{\@mobile}}
       \ifthenelse{\isundefined{\@email}}{}{\makenewline\emailsymbol\pdatastyle{\@email}}
@@ -107,70 +107,70 @@
     \end{tabular}
   }
   \newgeometry{top=12mm, bottom=12mm, left=18mm, right=10mm}
-  \nombrestyle{\@firstname} \apellidostyle{\@familyname}
+  \namestyle{\@firstname} \surnametyle{\@familyname}
   \hfill
-  \llap{\usebox{\titulo}}
+  \llap{\usebox{\title}}
   \par\addvspace{10mm}
 }
 
-\AtBeginDocument{\WithSuffix\newcommand\seccion*{\seccion}}
-\newcommand*{\seccion}[1]{
+\AtBeginDocument{\WithSuffix\newcommand\section*{\section}}
+\newcommand*{\section}[1]{
   \par\addvspace{5mm}
-  \begin{tabular}{@{}p{\introwidth}@{\hspace{\separadorwidth}}p{\textowidth}@{}}
-    \parbox[t]{\introwidth}{\raisebox{\baseletterheight}{\color{color1}\rule{\introwidth}{0.55ex}}} &{\parbox[t]{\textowidth}{\strut\seccionstyle{#1}}}
+  \begin{tabular}{@{}p{\introwidth}@{\hspace{\separatorwidth}}p{\textwidth}@{}}
+    \parbox[t]{\introwidth}{\raisebox{\baseletterheight}{\color{color1}\rule{\introwidth}{0.55ex}}} &{\parbox[t]{\textwidth}{\strut\sectionstyle{#1}}}
   \end{tabular}
   \par\addvspace{2mm}
 }
 
-\AtBeginDocument{\WithSuffix\newcommand\subseccion*{\subseccion}}
-\newcommand*{\subseccion}[3]{
+\AtBeginDocument{\WithSuffix\newcommand\subsection*{\subsection}}
+\newcommand*{\subsection}[3]{
   \par\addvspace{4mm}
-  \begin{tabular}{@{}p{\introwidth}@{\hspace{\separadorwidth}}p{\textowidth}@{}}
-    \parbox[t]{\introwidth}{} &{\parbox[t]{\textowidth}{\strut\subseccionstyle{#1}{\ifthenelse{\equal{#3}{}}{}{ \strut\coletillasubseccionstyle{#2} \strut\coletillasubseccionstyle{#3}}}}}
+  \begin{tabular}{@{}p{\introwidth}@{\hspace{\separatorwidth}}p{\textwidth}@{}}
+    \parbox[t]{\introwidth}{} &{\parbox[t]{\textwidth}{\strut\subsectionstyle{#1}{\ifthenelse{\equal{#3}{}}{}{ \strut\tailsubsectionstyle{#2} \strut\tailsubsectionstyle{#3}}}}}
   \end{tabular}
   \par\addvspace{1mm}
 }
 
-\AtBeginDocument{\WithSuffix\newcommand\subseccionConFecha*{\subseccionConFecha}}
-\newcommand*{\subseccionConFecha}[4]{
+\AtBeginDocument{\WithSuffix\newcommand\subsectionWithDate*{\subsectionWithDate}}
+\newcommand*{\subsectionWithDate}[4]{
   \par\addvspace{4mm}
-  \begin{tabular}{@{}p{\introwidth}@{\hspace{\separadorwidth}}p{\textowidth}@{}}
-    \parbox[t]{\introwidth}{\raggedleft\introstyle{#1}} &{\parbox[t]{\textowidth}{\strut\subseccionstyle{#2}{\ifthenelse{\equal{#3}{}}{}{ \strut\coletillasubseccionstyle{#3} \strut\coletillasubseccionstyle{#4}}}}}
+  \begin{tabular}{@{}p{\introwidth}@{\hspace{\separatorwidth}}p{\textwidth}@{}}
+    \parbox[t]{\introwidth}{\raggedleft\introstyle{#1}} &{\parbox[t]{\textwidth}{\strut\subsectionstyle{#2}{\ifthenelse{\equal{#3}{}}{}{ \strut\tailsubsectionstyle{#3} \strut\tailsubsectionstyle{#4}}}}}
   \end{tabular}
   \par\addvspace{1mm}
 }
 
-\newcommand*{\entrada}[3]{
+\newcommand*{\item}[3]{
   \par\addvspace{2mm}
-  \begin{tabular}{@{}p{\introwidth}@{\hspace{\separadorwidth}}p{\textowidth}@{}}
-    \parbox[t]{\introwidth}{\raggedleft\introstyle{#1}} &{\parbox[t]{\textowidth}{\strut\textoentradastyle{#2}{\ifthenelse{\equal{#3}{}}{}{\strut\textoentradastyle{, }\strut\coletillaentradastyle{#3}}}}}
+  \begin{tabular}{@{}p{\introwidth}@{\hspace{\separatorwidth}}p{\textwidth}@{}}
+    \parbox[t]{\introwidth}{\raggedleft\introstyle{#1}} &{\parbox[t]{\textwidth}{\strut\textitemstyle{#2}{\ifthenelse{\equal{#3}{}}{}{\strut\textitemstyle{, }\strut\tailitemstyle{#3}}}}}
   \end{tabular}
   \par\addvspace{1mm}
 }
 
-\newcommand*{\entradasindetalle}[3]{
-  \begin{tabular}{@{}p{\introwidth}@{\hspace{\separadorwidth}}p{\textowidth}@{}}
-    \parbox[t]{\introwidth}{\raggedleft\introstyle{#1}} &{\parbox[t]{\textowidth}{\strut\textoentradastyle{#2}{\ifthenelse{\equal{#3}{}}{}{\strut\textoentradastyle{, }\strut\coletillaentradastyle{#3}}}}}
+\newcommand*{\itemnodetail}[3]{
+  \begin{tabular}{@{}p{\introwidth}@{\hspace{\separatorwidth}}p{\textwidth}@{}}
+    \parbox[t]{\introwidth}{\raggedleft\introstyle{#1}} &{\parbox[t]{\textwidth}{\strut\textitemstyle{#2}{\ifthenelse{\equal{#3}{}}{}{\strut\textitemstyle{, }\strut\tailitemstyle{#3}}}}}
   \end{tabular}
 }
 
-\newcommand*{\detalle}[2][\listitemsymboli]{
-  \begin{tabular}{@{}p{\introwidth}@{\hspace{\separadorwidth}}p{\textowidth}@{}}
-    \parbox[t]{\introwidth}{} &{\strut\detallestyle{#1} \parbox[t]{\textowidth}{\strut\detallestyle{#2}}} 
-  \end{tabular}
-  \par\addvspace{1mm}
-}
-
-\newcommand*{\detallesinentrada}[2][\listitemsymbolii]{
-  \begin{tabular}{@{}p{\introwidth}@{\hspace{\separadorwidth}}p{\textowidth}@{}}
-    \parbox[t]{\introwidth}{} &{\strut\detallesinentradastyle{#1} \parbox[t]{\textowidth}{\strut\detallesinentradastyle{#2}}}
+\newcommand*{\detail}[2][\listitemsymboli]{
+  \begin{tabular}{@{}p{\introwidth}@{\hspace{\separatorwidth}}p{\textwidth}@{}}
+    \parbox[t]{\introwidth}{} &{\strut\detailstyle{#1} \parbox[t]{\textwidth}{\strut\detailstyle{#2}}} 
   \end{tabular}
   \par\addvspace{1mm}
 }
 
-\newcommand*{\detallesimple}[2][\listitemsymboliii]{
-  \begin{tabular}{@{}p{\introwidth}@{\hspace{\separadorwidth}}p{\textowidth}@{}}
-    \parbox[t]{\introwidth}{} &{\strut\detallestyle{#1} \parbox[t]{\textowidth}{\strut\detallestyle{#2}}} 
+\newcommand*{\detailnoitem}[2][\listitemsymbolii]{
+  \begin{tabular}{@{}p{\introwidth}@{\hspace{\separatorwidth}}p{\textwidth}@{}}
+    \parbox[t]{\introwidth}{} &{\strut\detailsinitemstyle{#1} \parbox[t]{\textwidth}{\strut\detailsinitemstyle{#2}}}
+  \end{tabular}
+  \par\addvspace{1mm}
+}
+
+\newcommand*{\detailsimple}[2][\listitemsymboliii]{
+  \begin{tabular}{@{}p{\introwidth}@{\hspace{\separatorwidth}}p{\textwidth}@{}}
+    \parbox[t]{\introwidth}{} &{\strut\detailstyle{#1} \parbox[t]{\textwidth}{\strut\detailstyle{#2}}} 
   \end{tabular}
   \par\addvspace{1mm}
 }
